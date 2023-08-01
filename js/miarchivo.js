@@ -7,12 +7,19 @@ function calcularCuota(monto, plazo, tasaInteres) {
 function simularCredito() {
     let monto = document.getElementById("monto").value;
     let plazo = document.getElementById("plazo").value;
-    let tasaInteres = 0.05;  // Suponemos una tasa de interés del 5%
 
     if(monto > 0 && plazo > 0) {
-        let cuotaMensual = calcularCuota(monto, plazo, tasaInteres);
-        document.getElementById("resultado").innerText = "La cuota mensual sería: " + cuotaMensual.toFixed(2);
+        let salida = "Tasa de interés: Cuota mensual\n";
+
+        // Simulamos tasas de interés desde 1% hasta 10%
+        for(let tasaInteres = 0.01; tasaInteres <= 0.10; tasaInteres += 0.01) {
+            let cuotaMensual = calcularCuota(monto, plazo, tasaInteres);
+            salida += (tasaInteres * 100).toFixed(2) + "%: " + cuotaMensual.toFixed(2) + "\n";
+        }
+        
+        document.getElementById("resultado").innerText = salida;
     } else {
         document.getElementById("resultado").innerText = "Por favor, ingresa valores válidos.";
     }
 }
+
